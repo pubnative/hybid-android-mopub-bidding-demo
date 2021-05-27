@@ -8,7 +8,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "net.pubnative.hybidstandalonedemo"
+        applicationId "net.pubnative.hybidmopubbiddingdemo"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
@@ -52,6 +52,9 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'net.pubnative:hybid.sdk:2.4.7'
+    implementation('com.mopub:mopub-sdk:5.16.0@aar') {
+        transitive = true
+    }
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

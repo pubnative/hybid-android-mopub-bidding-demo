@@ -1,2 +1,2 @@
-rootProject.name = "HyBid Standalone Demo"
+rootProject.name = "HyBid MoPub Bidding Demo"
 include ':app'

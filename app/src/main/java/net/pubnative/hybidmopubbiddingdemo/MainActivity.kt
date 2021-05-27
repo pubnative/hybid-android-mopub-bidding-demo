@@ -1,14 +1,13 @@
-package net.pubnative.hybidstandalonedemo
+package net.pubnative.hybidmopubbiddingdemo
 
 import android.os.Bundle
-import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import net.pubnative.hybidstandalonedemo.databinding.ActivityMainBinding
+import net.pubnative.hybidmopubbiddingdemo.databinding.ActivityMainBinding
 import net.pubnative.lite.sdk.HyBid
 
 class MainActivity : AppCompatActivity() {
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.navigation_banner, R.id.navigation_mrect, R.id.navigation_interstitial, R.id.navigation_rewarded, R.id.navigation_native))
+                R.id.navigation_banner, R.id.navigation_mrect, R.id.navigation_interstitial, R.id.navigation_rewarded))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 

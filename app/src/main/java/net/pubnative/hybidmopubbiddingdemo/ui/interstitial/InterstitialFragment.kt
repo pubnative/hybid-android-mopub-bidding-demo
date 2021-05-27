@@ -1,4 +1,4 @@
-package net.pubnative.hybidstandalonedemo.ui.interstitial
+package net.pubnative.hybidmopubbiddingdemo.ui.interstitial
 
 import android.os.Bundle
 import android.util.Log
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import net.pubnative.hybidstandalonedemo.R
+import net.pubnative.hybidmopubbiddingdemo.R
 import net.pubnative.lite.sdk.interstitial.HyBidInterstitialAd
 
 class InterstitialFragment : Fragment() {

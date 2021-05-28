@@ -11,7 +11,6 @@ import com.mopub.mobileads.MoPubErrorCode
 import com.mopub.mobileads.MoPubInterstitial
 import net.pubnative.hybidmopubbiddingdemo.R
 import net.pubnative.lite.sdk.api.RequestManager
-import net.pubnative.lite.sdk.interstitial.HyBidInterstitialAd
 import net.pubnative.lite.sdk.models.Ad
 import net.pubnative.lite.sdk.utils.HeaderBiddingUtils
 
@@ -37,6 +36,8 @@ class InterstitialFragment : Fragment(), RequestManager.RequestListener, MoPubIn
         showButton = view.findViewById(R.id.button_show)
 
         mopubInterstitial = MoPubInterstitial(requireActivity(), adUnitId)
+        mopubInterstitial.interstitialAdListener = this
+
         requestManager = RequestManager()
 
         loadButton.setOnClickListener {

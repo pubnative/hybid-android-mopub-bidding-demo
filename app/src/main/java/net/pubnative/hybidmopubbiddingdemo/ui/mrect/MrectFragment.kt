@@ -21,7 +21,6 @@ class MrectFragment : Fragment(), RequestManager.RequestListener, MoPubView.Bann
 
     private lateinit var requestManager: RequestManager
     private lateinit var mopubMRect: MoPubView
-
     private lateinit var loadButton: Button
 
     private val zoneId: String = "5"
@@ -37,6 +36,9 @@ class MrectFragment : Fragment(), RequestManager.RequestListener, MoPubView.Bann
         loadButton = view.findViewById(R.id.button_load)
 
         requestManager = MRectRequestManager()
+
+        mopubMRect.bannerAdListener = this
+        mopubMRect.autorefreshEnabled = false
 
         loadButton.setOnClickListener {
             loadMRect()
@@ -57,7 +59,8 @@ class MrectFragment : Fragment(), RequestManager.RequestListener, MoPubView.Bann
     // -------------------- RequestManager's Listeners ------------------------
     override fun onRequestSuccess(ad: Ad?) {
         mopubMRect.setAdUnitId(adUnitId)
-        mopubMRect.setKeywords(HeaderBiddingUtils.getHeaderBiddingKeywords(ad, HeaderBiddingUtils.KeywordMode.TWO_DECIMALS));
+        mopubMRect.setKeywords(HeaderBiddingUtils.getHeaderBiddingKeywords(ad, HeaderBiddingUtils.KeywordMode.TWO_DECIMALS))
+        mopubMRect.adSize = MoPubView.MoPubAdSize.HEIGHT_250
         mopubMRect.loadAd()
         Log.d(TAG, "onRequestSuccess")
     }
@@ -65,6 +68,7 @@ class MrectFragment : Fragment(), RequestManager.RequestListener, MoPubView.Bann
     override fun onRequestFail(throwable: Throwable?) {
         Log.d(TAG, "onRequestFail: ", throwable)
         mopubMRect.setAdUnitId(adUnitId)
+        mopubMRect.adSize = MoPubView.MoPubAdSize.HEIGHT_250
         mopubMRect.loadAd()
     }
 

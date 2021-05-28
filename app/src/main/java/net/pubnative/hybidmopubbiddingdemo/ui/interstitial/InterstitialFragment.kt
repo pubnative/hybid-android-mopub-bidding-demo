@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.mopub.mobileads.MoPubErrorCode
 import com.mopub.mobileads.MoPubInterstitial
 import net.pubnative.hybidmopubbiddingdemo.R
+import net.pubnative.lite.sdk.api.InterstitialRequestManager
 import net.pubnative.lite.sdk.api.RequestManager
 import net.pubnative.lite.sdk.models.Ad
 import net.pubnative.lite.sdk.utils.HeaderBiddingUtils
@@ -38,20 +39,20 @@ class InterstitialFragment : Fragment(), RequestManager.RequestListener, MoPubIn
         mopubInterstitial = MoPubInterstitial(requireActivity(), adUnitId)
         mopubInterstitial.interstitialAdListener = this
 
-        requestManager = RequestManager()
+        requestManager = InterstitialRequestManager()
 
         loadButton.setOnClickListener {
             loadInterstitial()
         }
 
         showButton.setOnClickListener {
-            mopubInterstitial?.show()
+            mopubInterstitial.show()
         }
 
     }
 
     override fun onDestroy() {
-        mopubInterstitial?.destroy()
+        mopubInterstitial.destroy()
         super.onDestroy()
     }
 

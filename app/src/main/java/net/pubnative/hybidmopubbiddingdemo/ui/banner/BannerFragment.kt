@@ -61,7 +61,7 @@ class BannerFragment : Fragment(), RequestManager.RequestListener, MoPubView.Ban
         Log.d(TAG, "onRequestSuccess")
         mopubBanner.setAdUnitId(mopubAdUnitId)
         mopubBanner.setKeywords(HeaderBiddingUtils.getHeaderBiddingKeywords(ad, HeaderBiddingUtils.KeywordMode.TWO_DECIMALS))
-        mopubBanner.loadAd();
+        mopubBanner.loadAd()
     }
 
     override fun onRequestFail(throwable: Throwable?) {

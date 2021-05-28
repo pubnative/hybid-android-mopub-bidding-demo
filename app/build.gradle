@@ -52,7 +52,7 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'net.pubnative:hybid.sdk:2.4.7'
-    implementation('com.mopub:mopub-sdk:5.16.0@aar') {
+    implementation('com.mopub:mopub-sdk:5.17.0@aar') {
         transitive = true
     }
     testImplementation 'junit:junit:4.13.2'

@@ -65,7 +65,7 @@ class InterstitialFragment : Fragment(), RequestManager.RequestListener, MoPubIn
     // -------------------- RequestManager's Listeners ------------------------
     override fun onRequestSuccess(ad: Ad?) {
         Log.d(TAG, "onRequestSuccess")
-        mopubInterstitial.setKeywords(HeaderBiddingUtils.getHeaderBiddingKeywords(ad, HeaderBiddingUtils.KeywordMode.TWO_DECIMALS))
+        mopubInterstitial.setKeywords(HeaderBiddingUtils.getHeaderBiddingKeywords(ad, HeaderBiddingUtils.KeywordMode.THREE_DECIMALS))
         mopubInterstitial.load()
     }
 
@@ -82,7 +82,7 @@ class InterstitialFragment : Fragment(), RequestManager.RequestListener, MoPubIn
     }
 
     override fun onInterstitialFailed(interstitial: MoPubInterstitial?, errorCode: MoPubErrorCode?) {
-        Log.d(TAG, "onInterstitialFailed")
+        Log.d(TAG, "onInterstitialFailed. Errorcode: ${errorCode.toString()}")
     }
 
     override fun onInterstitialShown(interstitial: MoPubInterstitial?) {

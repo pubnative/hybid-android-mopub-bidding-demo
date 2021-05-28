@@ -59,7 +59,7 @@ class MrectFragment : Fragment(), RequestManager.RequestListener, MoPubView.Bann
     // -------------------- RequestManager's Listeners ------------------------
     override fun onRequestSuccess(ad: Ad?) {
         mopubMRect.setAdUnitId(adUnitId)
-        mopubMRect.setKeywords(HeaderBiddingUtils.getHeaderBiddingKeywords(ad, HeaderBiddingUtils.KeywordMode.TWO_DECIMALS))
+        mopubMRect.setKeywords(HeaderBiddingUtils.getHeaderBiddingKeywords(ad, HeaderBiddingUtils.KeywordMode.THREE_DECIMALS))
         mopubMRect.adSize = MoPubView.MoPubAdSize.HEIGHT_250
         mopubMRect.loadAd()
         Log.d(TAG, "onRequestSuccess")

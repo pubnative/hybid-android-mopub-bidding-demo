@@ -7,16 +7,13 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.mopub.common.MoPub
-import com.mopub.common.SdkConfiguration
-import com.mopub.common.SdkInitializationListener
-import com.mopub.common.logging.MoPubLog
 import net.pubnative.hybidmopubbiddingdemo.databinding.ActivityMainBinding
 import net.pubnative.lite.sdk.HyBid
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val mopubManager = MoPubManager()
     private val hybidAppToken = "dde3c298b47648459f8ada4a982fa92d"
     private val mopubAdUnitId = "b8b82260e1b84a9ba361e03c21ce4caf"
 
@@ -37,20 +34,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         HyBid.initialize(hybidAppToken, application)
-        initMoPubSDK()
+        mopubManager.initMoPubSDK(application, mopubAdUnitId)
     }
 
-    private fun initMoPubSDK(){
-        val sdkConfiguration = SdkConfiguration.Builder(mopubAdUnitId)
-            .withLogLevel(MoPubLog.LogLevel.DEBUG)
-            .build()
-
-        MoPub.initializeSdk(application, sdkConfiguration, initSdkListener())
-    }
-
-    private fun initSdkListener(): SdkInitializationListener? {
-        return SdkInitializationListener {
-
-        }
-    }
 }

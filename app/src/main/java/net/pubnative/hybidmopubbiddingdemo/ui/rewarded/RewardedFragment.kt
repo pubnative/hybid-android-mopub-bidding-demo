@@ -13,11 +13,11 @@ import com.mopub.mobileads.MoPubErrorCode
 import com.mopub.mobileads.MoPubRewardedAdListener
 import com.mopub.mobileads.MoPubRewardedAdManager
 import com.mopub.mobileads.MoPubRewardedAds
+import net.pubnative.hybidmopubbiddingdemo.MoPubManager
 import net.pubnative.hybidmopubbiddingdemo.R
 import net.pubnative.lite.sdk.api.RequestManager
 import net.pubnative.lite.sdk.api.RewardedRequestManager
 import net.pubnative.lite.sdk.models.Ad
-import net.pubnative.lite.sdk.rewarded.HyBidRewardedAd
 import net.pubnative.lite.sdk.utils.HeaderBiddingUtils
 
 class RewardedFragment : Fragment(), RequestManager.RequestListener, MoPubRewardedAdListener {
@@ -30,6 +30,7 @@ class RewardedFragment : Fragment(), RequestManager.RequestListener, MoPubReward
 
     private val zoneId: String = "4"
     private val adUnitId: String = "51dea8bc737b455e8231b89153c81757"
+    private val moPubManager = MoPubManager()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         inflater.inflate(R.layout.fragment_rewarded, container, false)
@@ -42,6 +43,8 @@ class RewardedFragment : Fragment(), RequestManager.RequestListener, MoPubReward
 
         requestManager = RewardedRequestManager()
 
+        moPubManager.initMoPubSDK(requireContext(), adUnitId)
+
         MoPubRewardedAds.setRewardedAdListener(this)
 
         loadButton.setOnClickListener {
@@ -51,7 +54,6 @@ class RewardedFragment : Fragment(), RequestManager.RequestListener, MoPubReward
         showButton.setOnClickListener {
             MoPubRewardedAds.showRewardedAd(adUnitId)
         }
-
     }
 
     fun loadRewardedVideo() {

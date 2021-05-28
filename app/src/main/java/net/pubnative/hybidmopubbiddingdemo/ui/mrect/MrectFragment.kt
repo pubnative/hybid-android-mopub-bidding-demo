@@ -7,18 +7,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import com.mopub.mobileads.MoPubErrorCode
+import com.mopub.mobileads.MoPubView
 import net.pubnative.hybidmopubbiddingdemo.R
-import net.pubnative.lite.sdk.models.AdSize
-import net.pubnative.lite.sdk.views.HyBidAdView
-import net.pubnative.lite.sdk.views.PNAdView
+import net.pubnative.lite.sdk.api.MRectRequestManager
+import net.pubnative.lite.sdk.api.RequestManager
+import net.pubnative.lite.sdk.models.Ad
+import net.pubnative.lite.sdk.utils.HeaderBiddingUtils
 
-class MrectFragment : Fragment() {
+
+class MrectFragment : Fragment(), RequestManager.RequestListener, MoPubView.BannerAdListener {
     val TAG = MrectFragment::class.java.simpleName
 
-    private lateinit var hybidMrect: HyBidAdView
+    private lateinit var requestManager: RequestManager
+    private lateinit var mopubMRect: MoPubView
+
     private lateinit var loadButton: Button
 
     private val zoneId: String = "5"
+    private val adUnitId: String = "1fafef6b872a4e10ba9fc573ca347e55"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         inflater.inflate(R.layout.fragment_mrect, container, false)
@@ -26,41 +33,59 @@ class MrectFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        hybidMrect = view.findViewById(R.id.hybid_mrect)
+        mopubMRect = view.findViewById(R.id.mopub_mrect)
         loadButton = view.findViewById(R.id.button_load)
 
-        hybidMrect.setAdSize(AdSize.SIZE_300x250)
+        requestManager = MRectRequestManager()
 
         loadButton.setOnClickListener {
-            loadBanner()
+            loadMRect()
         }
-
     }
 
     override fun onDestroy() {
-        hybidMrect.destroy()
+        mopubMRect.destroy()
         super.onDestroy()
     }
 
-    private fun loadBanner() {
-        hybidMrect.load(zoneId, object : PNAdView.Listener {
+    private fun loadMRect() {
+        requestManager.setZoneId(zoneId)
+        requestManager.setRequestListener(this)
+        requestManager.requestAd()
+    }
 
-            override fun onAdLoaded() {
-                Log.d(TAG, "onAdLoaded")
+    // -------------------- RequestManager's Listeners ------------------------
+    override fun onRequestSuccess(ad: Ad?) {
+        mopubMRect.setAdUnitId(adUnitId)
+        mopubMRect.setKeywords(HeaderBiddingUtils.getHeaderBiddingKeywords(ad, HeaderBiddingUtils.KeywordMode.TWO_DECIMALS));
+        mopubMRect.loadAd()
+        Log.d(TAG, "onRequestSuccess")
+    }
 
-            }
+    override fun onRequestFail(throwable: Throwable?) {
+        Log.d(TAG, "onRequestFail: ", throwable)
+        mopubMRect.setAdUnitId(adUnitId)
+        mopubMRect.loadAd()
+    }
 
-            override fun onAdLoadFailed(error: Throwable) {
-                Log.d(TAG, "onAdLoadFailed")
-            }
+    // -------------------- MoPub's Listeners ------------------------
+    override fun onBannerLoaded(banner: MoPubView) {
+        Log.d(TAG, "onBannerLoaded")
+    }
 
-            override fun onAdImpression() {
-                Log.d(TAG, "onAdImpression")
-            }
+    override fun onBannerFailed(banner: MoPubView?, errorCode: MoPubErrorCode?) {
+        Log.d(TAG, "onBannerFailed")
+    }
 
-            override fun onAdClick() {
-                Log.d(TAG, "onAdClick")
-            }
-        })
+    override fun onBannerClicked(banner: MoPubView?) {
+        Log.d(TAG, "onBannerClicked")
+    }
+
+    override fun onBannerExpanded(banner: MoPubView?) {
+        Log.d(TAG, "onBannerExpanded")
+    }
+
+    override fun onBannerCollapsed(banner: MoPubView?) {
+        Log.d(TAG, "onBannerCollapsed")
     }
 }

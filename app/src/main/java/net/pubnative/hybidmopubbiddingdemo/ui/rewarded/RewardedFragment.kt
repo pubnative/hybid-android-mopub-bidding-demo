@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import androidx.fragment.app.Fragment
 import com.mopub.common.MoPub
 import com.mopub.common.MoPubReward
@@ -25,19 +26,32 @@ class RewardedFragment : Fragment(), RequestManager.RequestListener, MoPubReward
     private lateinit var requestManager: RequestManager
 
     private lateinit var loadButton: Button
+    private lateinit var prepareButton: Button
     private lateinit var showButton: Button
+    private lateinit var cachingCheckbox: CheckBox
 
     private val zoneId: String = "4"
     private val adUnitId: String = "51dea8bc737b455e8231b89153c81757"
+    private var cachingEnabled: Boolean = true
+    private var ad: Ad? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? =
         inflater.inflate(R.layout.fragment_rewarded, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         loadButton = view.findViewById(R.id.button_load)
+        prepareButton = view.findViewById(R.id.button_prepare)
         showButton = view.findViewById(R.id.button_show)
+        cachingCheckbox = view.findViewById(R.id.check_caching)
+        cachingCheckbox.visibility = View.VISIBLE
+        prepareButton.isEnabled = false
+        showButton.isEnabled = false
 
         requestManager = RewardedRequestManager()
 
@@ -47,27 +61,44 @@ class RewardedFragment : Fragment(), RequestManager.RequestListener, MoPubReward
             loadRewardedVideo()
         }
 
+        prepareButton.setOnClickListener {
+            ad?.let { ad ->
+                requestManager.cacheAd(ad)
+            }
+        }
+
         showButton.setOnClickListener {
             MoPubRewardedAds.showRewardedAd(adUnitId)
         }
+
+        cachingCheckbox.setOnCheckedChangeListener { _, isChecked ->
+            cachingEnabled = isChecked
+            prepareButton.visibility = if (isChecked) View.GONE else View.VISIBLE
+        }
     }
 
-    fun loadRewardedVideo() {
+    private fun loadRewardedVideo() {
         requestManager.setZoneId(zoneId)
         requestManager.setRequestListener(this)
+        requestManager.isAutoCacheOnLoad = cachingEnabled
         requestManager.requestAd()
     }
 
     // -------------------- RequestManager's Listeners ------------------------
     override fun onRequestSuccess(ad: Ad?) {
-        MoPubRewardedAds.loadRewardedAd(adUnitId,
-            MoPubRewardedAdManager.RequestParameters(HeaderBiddingUtils.getHeaderBiddingKeywords(ad)))
+        this.ad = ad
+        MoPubRewardedAds.loadRewardedAd(
+            adUnitId,
+            MoPubRewardedAdManager.RequestParameters(HeaderBiddingUtils.getHeaderBiddingKeywords(ad))
+        )
 
         Log.d(TAG, "onRequestSuccess")
     }
 
     override fun onRequestFail(throwable: Throwable?) {
         Log.d(TAG, "onRequestFail: ", throwable)
+        ad = null
+        MoPubRewardedAds.loadRewardedAd(adUnitId)
     }
 
     // -------------------- MoPub's Listeners ------------------------

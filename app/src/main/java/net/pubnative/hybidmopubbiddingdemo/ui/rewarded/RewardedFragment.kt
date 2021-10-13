@@ -20,7 +20,7 @@ import net.pubnative.lite.sdk.api.RewardedRequestManager
 import net.pubnative.lite.sdk.models.Ad
 import net.pubnative.lite.sdk.utils.HeaderBiddingUtils
 
-class RewardedFragment : Fragment(), RequestManager.RequestListener, MoPubRewardedAdListener {
+class RewardedFragment : Fragment(R.layout.fragment_rewarded), RequestManager.RequestListener, MoPubRewardedAdListener {
     val TAG = RewardedFragment::class.java.simpleName
 
     private lateinit var requestManager: RequestManager
@@ -35,13 +35,6 @@ class RewardedFragment : Fragment(), RequestManager.RequestListener, MoPubReward
     private var cachingEnabled: Boolean = true
     private var ad: Ad? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? =
-        inflater.inflate(R.layout.fragment_rewarded, container, false)
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -49,7 +42,6 @@ class RewardedFragment : Fragment(), RequestManager.RequestListener, MoPubReward
         prepareButton = view.findViewById(R.id.button_prepare)
         showButton = view.findViewById(R.id.button_show)
         cachingCheckbox = view.findViewById(R.id.check_caching)
-        cachingCheckbox.visibility = View.VISIBLE
         prepareButton.isEnabled = false
         showButton.isEnabled = false
 

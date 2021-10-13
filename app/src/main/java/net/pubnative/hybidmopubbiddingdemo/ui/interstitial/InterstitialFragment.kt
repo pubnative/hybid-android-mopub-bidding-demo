@@ -16,7 +16,7 @@ import net.pubnative.lite.sdk.api.RequestManager
 import net.pubnative.lite.sdk.models.Ad
 import net.pubnative.lite.sdk.utils.HeaderBiddingUtils
 
-class InterstitialFragment : Fragment(), RequestManager.RequestListener,
+class InterstitialFragment : Fragment(R.layout.fragment_interstitial), RequestManager.RequestListener,
     MoPubInterstitial.InterstitialAdListener {
     val TAG = InterstitialFragment::class.java.simpleName
 
@@ -33,13 +33,6 @@ class InterstitialFragment : Fragment(), RequestManager.RequestListener,
     private var cachingEnabled: Boolean = true
     private var ad: Ad? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? =
-        inflater.inflate(R.layout.fragment_interstitial, container, false)
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -47,7 +40,6 @@ class InterstitialFragment : Fragment(), RequestManager.RequestListener,
         prepareButton = view.findViewById(R.id.button_prepare)
         showButton = view.findViewById(R.id.button_show)
         cachingCheckbox = view.findViewById(R.id.check_caching)
-        cachingCheckbox.visibility = View.VISIBLE
         prepareButton.isEnabled = false
         showButton.isEnabled = false
 

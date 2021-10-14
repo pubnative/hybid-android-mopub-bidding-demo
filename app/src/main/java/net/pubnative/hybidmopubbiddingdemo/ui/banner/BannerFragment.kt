@@ -24,7 +24,7 @@ class BannerFragment : Fragment(R.layout.fragment_banner), RequestManager.Reques
     private lateinit var loadButton: Button
 
     private val zoneId: String = "2"
-    private val mopubAdUnitId = "b8b82260e1b84a9ba361e03c21ce4caf"
+    private val mopubAdUnitId = "94ef2036a5f4453b8eb096627359cffe"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

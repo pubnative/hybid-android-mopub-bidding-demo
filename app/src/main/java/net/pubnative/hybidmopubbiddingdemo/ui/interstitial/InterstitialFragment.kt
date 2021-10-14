@@ -28,8 +28,8 @@ class InterstitialFragment : Fragment(R.layout.fragment_interstitial), RequestMa
     private lateinit var showButton: Button
     private lateinit var cachingCheckbox: CheckBox
 
-    private val zoneId: String = "3"
-    private var adUnitId: String = "0bd7ea20185547f2bd29a9574bfce917"
+    private val zoneId: String = "4"
+    private var adUnitId: String = "ab174d4c566e45d1ba86e7b8f61b22dc"
     private var cachingEnabled: Boolean = true
     private var ad: Ad? = null
 

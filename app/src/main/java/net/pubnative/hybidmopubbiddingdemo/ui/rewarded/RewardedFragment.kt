@@ -31,7 +31,7 @@ class RewardedFragment : Fragment(R.layout.fragment_rewarded), RequestManager.Re
     private lateinit var cachingCheckbox: CheckBox
 
     private val zoneId: String = "4"
-    private val adUnitId: String = "51dea8bc737b455e8231b89153c81757"
+    private val adUnitId: String = "64f6df919cd149a68776ce0dc2136225"
     private var cachingEnabled: Boolean = true
     private var ad: Ad? = null
 

@@ -24,7 +24,7 @@ class MrectFragment : Fragment(R.layout.fragment_mrect), RequestManager.RequestL
     private lateinit var loadButton: Button
 
     private val zoneId: String = "5"
-    private val adUnitId: String = "1fafef6b872a4e10ba9fc573ca347e55"
+    private val adUnitId: String = "91736fc87a9a45ad908053899a8e28db"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

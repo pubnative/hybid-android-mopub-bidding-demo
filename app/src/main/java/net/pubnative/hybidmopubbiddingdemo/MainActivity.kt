@@ -45,12 +45,12 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         HyBid.initialize(HYBID_APP_TOKEN, application)
-        initMoPubSDK(MOPUB_AD_UNIT_ID)
+        initMoPubSDK()
     }
 
 
-    private fun initMoPubSDK(adUnitId: String) {
-        val sdkConfiguration = SdkConfiguration.Builder(adUnitId)
+    private fun initMoPubSDK() {
+        val sdkConfiguration = SdkConfiguration.Builder(MOPUB_AD_UNIT_ID)
             .withLogLevel(MoPubLog.LogLevel.DEBUG)
             .build()
 

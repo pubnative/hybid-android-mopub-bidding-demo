@@ -96,6 +96,7 @@ class RewardedFragment : Fragment(R.layout.fragment_rewarded), RequestManager.Re
     // -------------------- MoPub's Listeners ------------------------
     override fun onRewardedAdLoadSuccess(adUnitId: String) {
         Log.d(TAG, "onRewardedAdLoadSuccess")
+        prepareButton.isEnabled = !cachingEnabled
         showButton.isEnabled = true
     }
 

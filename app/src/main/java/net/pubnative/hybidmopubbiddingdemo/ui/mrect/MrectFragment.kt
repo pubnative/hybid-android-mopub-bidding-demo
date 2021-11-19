@@ -16,7 +16,7 @@ import net.pubnative.lite.sdk.models.Ad
 import net.pubnative.lite.sdk.utils.HeaderBiddingUtils
 
 
-class MrectFragment : Fragment(), RequestManager.RequestListener, MoPubView.BannerAdListener {
+class MrectFragment : Fragment(R.layout.fragment_mrect), RequestManager.RequestListener, MoPubView.BannerAdListener {
     val TAG = MrectFragment::class.java.simpleName
 
     private lateinit var requestManager: RequestManager
@@ -24,10 +24,7 @@ class MrectFragment : Fragment(), RequestManager.RequestListener, MoPubView.Bann
     private lateinit var loadButton: Button
 
     private val zoneId: String = "5"
-    private val adUnitId: String = "1fafef6b872a4e10ba9fc573ca347e55"
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.fragment_mrect, container, false)
+    private val adUnitId: String = "91736fc87a9a45ad908053899a8e28db"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,7 +56,12 @@ class MrectFragment : Fragment(), RequestManager.RequestListener, MoPubView.Bann
     // -------------------- RequestManager's Listeners ------------------------
     override fun onRequestSuccess(ad: Ad?) {
         mopubMRect.setAdUnitId(adUnitId)
-        mopubMRect.setKeywords(HeaderBiddingUtils.getHeaderBiddingKeywords(ad, HeaderBiddingUtils.KeywordMode.THREE_DECIMALS))
+        mopubMRect.setKeywords(
+            HeaderBiddingUtils.getHeaderBiddingKeywords(
+                ad,
+                HeaderBiddingUtils.KeywordMode.THREE_DECIMALS
+            )
+        )
         mopubMRect.adSize = MoPubView.MoPubAdSize.HEIGHT_250
         mopubMRect.loadAd()
         Log.d(TAG, "onRequestSuccess")

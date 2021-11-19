@@ -16,7 +16,7 @@ import net.pubnative.lite.sdk.models.Ad
 import net.pubnative.lite.sdk.utils.HeaderBiddingUtils
 
 
-class BannerFragment : Fragment(), RequestManager.RequestListener, MoPubView.BannerAdListener{
+class BannerFragment : Fragment(R.layout.fragment_banner), RequestManager.RequestListener, MoPubView.BannerAdListener {
     val TAG = BannerFragment::class.java.simpleName
 
     private lateinit var requestManager: RequestManager
@@ -24,10 +24,7 @@ class BannerFragment : Fragment(), RequestManager.RequestListener, MoPubView.Ban
     private lateinit var loadButton: Button
 
     private val zoneId: String = "2"
-    private val mopubAdUnitId = "b8b82260e1b84a9ba361e03c21ce4caf"
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.fragment_banner, container, false)
+    private val mopubAdUnitId = "94ef2036a5f4453b8eb096627359cffe"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -60,7 +57,12 @@ class BannerFragment : Fragment(), RequestManager.RequestListener, MoPubView.Ban
     override fun onRequestSuccess(ad: Ad?) {
         Log.d(TAG, "onRequestSuccess")
         mopubBanner.setAdUnitId(mopubAdUnitId)
-        mopubBanner.setKeywords(HeaderBiddingUtils.getHeaderBiddingKeywords(ad, HeaderBiddingUtils.KeywordMode.TWO_DECIMALS))
+        mopubBanner.setKeywords(
+            HeaderBiddingUtils.getHeaderBiddingKeywords(
+                ad,
+                HeaderBiddingUtils.KeywordMode.TWO_DECIMALS
+            )
+        )
         mopubBanner.loadAd()
     }
 

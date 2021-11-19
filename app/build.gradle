@@ -51,8 +51,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation 'net.pubnative:hybid.sdk:2.8.1'
-    implementation 'net.pubnative:hybid.adapters.mopub:2.8.1'
+    implementation 'net.pubnative:hybid.sdk:2.9.0-development.6906'
+    implementation 'net.pubnative:hybid.adapters.mopub:2.9.0-development.6906'
     implementation('com.mopub:mopub-sdk:5.18.0@aar') {
         transitive = true
     }

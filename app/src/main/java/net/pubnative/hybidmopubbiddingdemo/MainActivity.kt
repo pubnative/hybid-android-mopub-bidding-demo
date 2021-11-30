@@ -45,6 +45,8 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         HyBid.initialize(HYBID_APP_TOKEN, application)
+        HyBid.setVideoInterstitialSkipOffset(5)
+        HyBid.setHtmlInterstitialSkipOffset(5)
         initMoPubSDK()
     }
 
